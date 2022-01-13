@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"strconv"
+)
 
 func BuildNewOz() *Oz {
 	var cities = 1
@@ -9,12 +13,11 @@ func BuildNewOz() *Oz {
 	for cities <= newOz.NumberOfCities {
 		newCity := BuildCity()
 		newOz.Cities[newCity.name] = newCity
+		UpdateMaxPackNumCity(newOz, newCity, newOz.Cities[newOz.MaxNumPackCity])
 		cities++
 	}
 
-	fmt.Println(newOz.NumberOfCities)
-
-	return nil
+	return newOz
 }
 
 func BuildCity() *City {
@@ -22,17 +25,17 @@ func BuildCity() *City {
 	newCity := CreateCity()
 
 	for posts <= newCity.numberOfPostOffices {
-		newPost := BuildPostOffice()
-		newCity.postOffices[posts] = newPost
+		newPost := BuildPostOffice(newCity)
+		newCity.postOffices[strconv.Itoa(posts-1)] = newPost
 		posts++
 	}
 
 	return newCity
 }
 
-func BuildPostOffice() *PostOffice {
+func BuildPostOffice(cityHost *City) *PostOffice {
 	var packages = 1
-	newOffice := CreatePostOffice()
+	newOffice := CreatePostOffice(cityHost)
 
 	for packages <= newOffice.numOfPack {
 		newPack := CreatePack()
@@ -147,3 +150,15 @@ func getUserIntInput() int {
 
 	return number
 */
+
+func iterateFields(v interface{}) {
+	valueOf := reflect.ValueOf(v)
+	for i := 0; i < valueOf.NumField(); i++ {
+		field := valueOf.Field(i)
+		if field.Kind() == reflect.Struct {
+			iterateFields(field.Interface())
+			continue
+		}
+		fmt.Println(field.String())
+	}
+}

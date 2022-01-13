@@ -2,6 +2,7 @@ package main
 
 type Oz struct {
 	NumberOfCities int
+	MaxNumPackCity string
 	Cities         map[string]*City
 }
 
@@ -10,11 +11,8 @@ func CreateOz() *Oz {
 
 	newOz := &Oz{
 		NumberOfCities: userInput,
+		MaxNumPackCity: "",
 		Cities:         make(map[string]*City),
 	}
 	return newOz
-}
-
-func CityRepr(cityName string) {
-
 }
