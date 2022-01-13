@@ -4,7 +4,7 @@ type PostOffice struct {
 	numOfPack   int
 	max_weight  int
 	min_weight  int
-	mailPackage map[string]*int
+	mailPackage []*Package
 }
 
 func CreatePostOffice(hostCity *City) *PostOffice {
@@ -14,7 +14,7 @@ func CreatePostOffice(hostCity *City) *PostOffice {
 		numOfPack:   packNum,
 		max_weight:  max,
 		min_weight:  min,
-		mailPackage: make(map[string]*int),
+		mailPackage: make([]*Package, packNum),
 	}
 
 	hostCity.TotalNumOfPacks += packNum
