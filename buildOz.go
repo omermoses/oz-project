@@ -39,11 +39,12 @@ func BuildPostOffice(cityHost *City) *PostOffice {
 
 	for packages <= newOffice.numOfPack {
 		newPack := CreatePack()
+		newOffice.mailPackage = append(newOffice.mailPackage, newPack)
 		fmt.Println(newPack.weight)
 		packages++
 	}
 
-	return nil
+	return newOffice
 }
 
 /*func BuildNewOz() *structures.Oz {
