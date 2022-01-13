@@ -3,7 +3,8 @@ package main
 type City struct {
 	name                string
 	numberOfPostOffices int
-	postOffices         map[int]*PostOffice
+	TotalNumOfPacks     int
+	postOffices         map[string]*PostOffice
 }
 
 func CreateCity() *City {
@@ -13,11 +14,12 @@ func CreateCity() *City {
 	newCity := &City{
 		name:                cityName,
 		numberOfPostOffices: numOfOffices,
-		postOffices:         make(map[int]*PostOffice),
+		TotalNumOfPacks:     0,
+		postOffices:         make(map[string]*PostOffice),
 	}
 	return newCity
 }
 
 func repr(city *City) {
-	
+
 }
